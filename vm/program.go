@@ -1,7 +1,6 @@
 package vm
 
 import (
-	"encoding/binary"
 	"fmt"
 	"regexp"
 
@@ -12,7 +11,7 @@ type Program struct {
 	Source    *file.Source
 	Locations []file.Location
 	Constants []interface{}
-	Bytecode  []byte
+	Bytecode  []int
 }
 
 func (program *Program) Disassemble() string {
@@ -23,12 +22,12 @@ func (program *Program) Disassemble() string {
 		op := program.Bytecode[ip]
 		ip++
 
-		readArg := func() uint16 {
+		readArg := func() int {
 			if ip+1 >= len(program.Bytecode) {
 				return 0
 			}
 
-			i := binary.LittleEndian.Uint16([]byte{program.Bytecode[ip], program.Bytecode[ip+1]})
+			i := program.Bytecode[ip]
 			ip += 2
 			return i
 		}

@@ -1,7 +1,6 @@
 package compiler
 
 import (
-	"encoding/binary"
 	"fmt"
 	"math"
 	"reflect"
@@ -21,7 +20,7 @@ func Compile(tree *parser.Tree, config *conf.Config) (program *Program, err erro
 	}()
 
 	c := &compiler{
-		index: make(map[interface{}]uint16),
+		index: make(map[interface{}]int),
 	}
 	if config != nil {
 		c.mapEnv = config.MapEnv
@@ -49,14 +48,14 @@ func Compile(tree *parser.Tree, config *conf.Config) (program *Program, err erro
 type compiler struct {
 	locations   []file.Location
 	constants   []interface{}
-	bytecode    []byte
-	index       map[interface{}]uint16
+	bytecode    []int
+	index       map[interface{}]int
 	mapEnv      bool
 	cast        reflect.Kind
 	currentNode ast.Node
 }
 
-func (c *compiler) emit(op byte, b ...byte) int {
+func (c *compiler) emit(op int, b ...int) int {
 	c.bytecode = append(c.bytecode, op)
 	current := len(c.bytecode)
 	c.bytecode = append(c.bytecode, b...)
@@ -72,7 +71,7 @@ func (c *compiler) emitPush(value interface{}) int {
 	return c.emit(OpPush, c.makeConstant(value)...)
 }
 
-func (c *compiler) makeConstant(i interface{}) []byte {
+func (c *compiler) makeConstant(i interface{}) []int {
 	hashable := true
 	switch reflect.TypeOf(i).Kind() {
 	case reflect.Slice, reflect.Map:
@@ -90,26 +89,25 @@ func (c *compiler) makeConstant(i interface{}) []byte {
 		panic("exceeded constants max space limit")
 	}
 
-	p := uint16(len(c.constants) - 1)
+	p := len(c.constants) - 1
 	if hashable {
 		c.index[i] = p
 	}
 	return encode(p)
 }
 
-func (c *compiler) placeholder() []byte {
-	return []byte{0xFF, 0xFF}
+func (c *compiler) placeholder() []int {
+	return []int{0xFF}
 }
 
 func (c *compiler) patchJump(placeholder int) {
-	offset := len(c.bytecode) - 2 - placeholder
-	b := encode(uint16(offset))
+	offset := len(c.bytecode) - 1 - placeholder
+	b := encode(offset)
 	c.bytecode[placeholder] = b[0]
-	c.bytecode[placeholder+1] = b[1]
 }
 
-func (c *compiler) calcBackwardJump(to int) []byte {
-	return encode(uint16(len(c.bytecode) + 1 + 2 - to))
+func (c *compiler) calcBackwardJump(to int) []int {
+	return encode(len(c.bytecode) + 1 + 1 - to)
 }
 
 func (c *compiler) compile(node ast.Node) {
@@ -548,7 +546,7 @@ func (c *compiler) emitCond(body func()) {
 	c.patchJump(jmp)
 }
 
-func (c *compiler) emitLoop(body func()) []byte {
+func (c *compiler) emitLoop(body func()) []int {
 	i := c.makeConstant("i")
 	size := c.makeConstant("size")
 	array := c.makeConstant("array")
@@ -625,9 +623,9 @@ func (c *compiler) PairNode(node *ast.PairNode) {
 	c.compile(node.Value)
 }
 
-func encode(i uint16) []byte {
-	b := make([]byte, 2)
-	binary.LittleEndian.PutUint16(b, i)
+func encode(i int) []int {
+	b := make([]int, 1)
+	b[0] = i
 	return b
 }
 

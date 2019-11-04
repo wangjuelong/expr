@@ -29,7 +29,7 @@ func Run(program *Program, env interface{}) (out interface{}, err error) {
 type VM struct {
 	stack     []interface{}
 	constants []interface{}
-	bytecode  []byte
+	bytecode  []int
 	ip        int
 	pp        int
 	scopes    []Scope
@@ -359,10 +359,10 @@ func (vm *VM) pop() interface{} {
 	return value
 }
 
-func (vm *VM) arg() uint16 {
-	b0, b1 := vm.bytecode[vm.ip], vm.bytecode[vm.ip+1]
-	vm.ip += 2
-	return uint16(b0) | uint16(b1)<<8
+func (vm *VM) arg() int {
+	b0 := vm.bytecode[vm.ip]
+	vm.ip += 1
+	return b0
 }
 
 func (vm *VM) constant() interface{} {

@@ -1,7 +1,7 @@
 package vm
 
 const (
-	OpPush byte = iota
+	OpPush int = iota
 	OpPop
 	OpRot
 	OpFetch
