@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/antonmedv/expr/file"
+	"github.com/wangjuelong/expr/file"
 )
 
 var errorType = reflect.TypeOf((*error)(nil)).Elem()
@@ -241,11 +241,16 @@ func (vm *VM) Run(program *Program, env interface{}) (out interface{}, err error
 			a := vm.pop()
 			r := vm.constant().(*regexp.Regexp)
 			vm.push(r.MatchString(a.(string)))
-
+		// TODO excludes
 		case OpContains:
 			b := vm.pop()
 			a := vm.pop()
 			vm.push(strings.Contains(a.(string), b.(string)))
+
+		case OpExcludes:
+			b := vm.pop()
+			a := vm.pop()
+			vm.push(!strings.Contains(a.(string), b.(string)))
 
 		case OpStartsWith:
 			b := vm.pop()

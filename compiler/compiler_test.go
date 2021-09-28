@@ -5,10 +5,10 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/antonmedv/expr/compiler"
-	"github.com/antonmedv/expr/conf"
-	"github.com/antonmedv/expr/parser"
-	"github.com/antonmedv/expr/vm"
+	"github.com/wangjuelong/expr/compiler"
+	"github.com/wangjuelong/expr/conf"
+	"github.com/wangjuelong/expr/parser"
+	"github.com/wangjuelong/expr/vm"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

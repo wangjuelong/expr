@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/antonmedv/expr/ast"
-	"github.com/antonmedv/expr/conf"
-	"github.com/antonmedv/expr/file"
-	"github.com/antonmedv/expr/parser"
+	"github.com/wangjuelong/expr/ast"
+	"github.com/wangjuelong/expr/conf"
+	"github.com/wangjuelong/expr/file"
+	"github.com/wangjuelong/expr/parser"
 )
 
 var errorType = reflect.TypeOf((*error)(nil)).Elem()
@@ -255,8 +255,8 @@ func (v *visitor) BinaryNode(node *ast.BinaryNode) reflect.Type {
 		if isString(l) && isString(r) {
 			return stringType
 		}
-
-	case "contains", "startsWith", "endsWith":
+	// TODO excludes
+	case "contains", "startsWith", "endsWith","excludes":
 		if isString(l) && isString(r) {
 			return boolType
 		}

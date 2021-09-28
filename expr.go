@@ -2,16 +2,16 @@ package expr
 
 import (
 	"fmt"
-	"github.com/antonmedv/expr/ast"
-	"github.com/antonmedv/expr/file"
+	"github.com/wangjuelong/expr/ast"
+	"github.com/wangjuelong/expr/file"
 	"reflect"
 
-	"github.com/antonmedv/expr/checker"
-	"github.com/antonmedv/expr/compiler"
-	"github.com/antonmedv/expr/conf"
-	"github.com/antonmedv/expr/optimizer"
-	"github.com/antonmedv/expr/parser"
-	"github.com/antonmedv/expr/vm"
+	"github.com/wangjuelong/expr/checker"
+	"github.com/wangjuelong/expr/compiler"
+	"github.com/wangjuelong/expr/conf"
+	"github.com/wangjuelong/expr/optimizer"
+	"github.com/wangjuelong/expr/parser"
+	"github.com/wangjuelong/expr/vm"
 )
 
 // Option for configuring config.

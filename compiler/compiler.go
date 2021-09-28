@@ -6,11 +6,11 @@ import (
 	"math"
 	"reflect"
 
-	"github.com/antonmedv/expr/ast"
-	"github.com/antonmedv/expr/conf"
-	"github.com/antonmedv/expr/file"
-	"github.com/antonmedv/expr/parser"
-	. "github.com/antonmedv/expr/vm"
+	"github.com/wangjuelong/expr/ast"
+	"github.com/wangjuelong/expr/conf"
+	"github.com/wangjuelong/expr/file"
+	"github.com/wangjuelong/expr/parser"
+	. "github.com/wangjuelong/expr/vm"
 )
 
 func Compile(tree *parser.Tree, config *conf.Config) (program *Program, err error) {
@@ -364,10 +364,16 @@ func (c *compiler) BinaryNode(node *ast.BinaryNode) {
 		c.compile(node.Right)
 		c.emit(OpExponent)
 
+	// TODO excludes
 	case "contains":
 		c.compile(node.Left)
 		c.compile(node.Right)
 		c.emit(OpContains)
+
+	case "excludes":
+		c.compile(node.Left)
+		c.compile(node.Right)
+		c.emit(OpExcludes)
 
 	case "startsWith":
 		c.compile(node.Left)

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/antonmedv/expr/file"
+	"github.com/wangjuelong/expr/file"
 )
 
 type Program struct {
@@ -156,9 +156,12 @@ func (program *Program) Disassemble() string {
 
 		case OpMatchesConst:
 			constant("OpMatchesConst")
-
+		// TODO excludes
 		case OpContains:
 			code("OpContains")
+
+		case OpExcludes:
+			code("OpExcludes")
 
 		case OpStartsWith:
 			code("OpStartsWith")

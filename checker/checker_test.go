@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/antonmedv/expr"
-	"github.com/antonmedv/expr/ast"
-	"github.com/antonmedv/expr/checker"
-	"github.com/antonmedv/expr/conf"
-	"github.com/antonmedv/expr/parser"
 	"github.com/stretchr/testify/assert"
+	"github.com/wangjuelong/expr"
+	"github.com/wangjuelong/expr/ast"
+	"github.com/wangjuelong/expr/checker"
+	"github.com/wangjuelong/expr/conf"
+	"github.com/wangjuelong/expr/parser"
 )
 
 func TestCheck_debug(t *testing.T) {

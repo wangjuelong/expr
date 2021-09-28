@@ -1,6 +1,6 @@
-module github.com/antonmedv/expr
+module github.com/wangjuelong/expr
 
-go 1.13
+go 1.16
 
 require (
 	github.com/gdamore/tcell v1.3.0

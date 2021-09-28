@@ -33,7 +33,9 @@ const (
 	OpRange
 	OpMatches
 	OpMatchesConst
+	// OpContains TODO excludes
 	OpContains
+	OpExcludes
 	OpStartsWith
 	OpEndsWith
 	OpIndex

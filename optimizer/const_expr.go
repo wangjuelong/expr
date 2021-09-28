@@ -2,8 +2,8 @@ package optimizer
 
 import (
 	"fmt"
-	. "github.com/antonmedv/expr/ast"
-	"github.com/antonmedv/expr/file"
+	. "github.com/wangjuelong/expr/ast"
+	"github.com/wangjuelong/expr/file"
 	"reflect"
 	"strings"
 )

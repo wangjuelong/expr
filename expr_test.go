@@ -8,12 +8,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/antonmedv/expr/ast"
-	"github.com/antonmedv/expr/file"
-
-	"github.com/antonmedv/expr"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/wangjuelong/expr"
+	"github.com/wangjuelong/expr/ast"
+	"github.com/wangjuelong/expr/file"
 )
 
 func ExampleEval() {

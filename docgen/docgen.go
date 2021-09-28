@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/antonmedv/expr/conf"
+	"github.com/wangjuelong/expr/conf"
 )
 
 // Kind can be any of array, map, struct, func, string, int, float, bool or any.
@@ -34,7 +34,8 @@ type Type struct {
 }
 
 var (
-	Operators = []string{"matches", "contains", "startsWith", "endsWith"}
+	// Operators TODO excludes
+	Operators = []string{"matches", "contains", "excludes", "startsWith", "endsWith"}
 	Builtins  = map[Identifier]*Type{
 		"true":   {Kind: "bool"},
 		"false":  {Kind: "bool"},

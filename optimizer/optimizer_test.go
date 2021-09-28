@@ -4,11 +4,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/antonmedv/expr/ast"
-	"github.com/antonmedv/expr/checker"
-	"github.com/antonmedv/expr/conf"
-	"github.com/antonmedv/expr/optimizer"
-	"github.com/antonmedv/expr/parser"
+	"github.com/wangjuelong/expr/ast"
+	"github.com/wangjuelong/expr/checker"
+	"github.com/wangjuelong/expr/conf"
+	"github.com/wangjuelong/expr/optimizer"
+	"github.com/wangjuelong/expr/parser"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

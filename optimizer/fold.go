@@ -4,8 +4,8 @@ import (
 	"math"
 	"reflect"
 
-	. "github.com/antonmedv/expr/ast"
-	"github.com/antonmedv/expr/file"
+	. "github.com/wangjuelong/expr/ast"
+	"github.com/wangjuelong/expr/file"
 )
 
 type fold struct {

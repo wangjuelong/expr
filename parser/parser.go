@@ -7,9 +7,9 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	. "github.com/antonmedv/expr/ast"
-	"github.com/antonmedv/expr/file"
-	. "github.com/antonmedv/expr/parser/lexer"
+	. "github.com/wangjuelong/expr/ast"
+	"github.com/wangjuelong/expr/file"
+	. "github.com/wangjuelong/expr/parser/lexer"
 )
 
 type associativity int
@@ -36,20 +36,22 @@ var unaryOperators = map[string]operator{
 }
 
 var binaryOperators = map[string]operator{
-	"or":         {10, left},
-	"||":         {10, left},
-	"and":        {15, left},
-	"&&":         {15, left},
-	"==":         {20, left},
-	"!=":         {20, left},
-	"<":          {20, left},
-	">":          {20, left},
-	">=":         {20, left},
-	"<=":         {20, left},
-	"not in":     {20, left},
-	"in":         {20, left},
-	"matches":    {20, left},
+	"or":      {10, left},
+	"||":      {10, left},
+	"and":     {15, left},
+	"&&":      {15, left},
+	"==":      {20, left},
+	"!=":      {20, left},
+	"<":       {20, left},
+	">":       {20, left},
+	">=":      {20, left},
+	"<=":      {20, left},
+	"not in":  {20, left},
+	"in":      {20, left},
+	"matches": {20, left},
+	// TODO contains
 	"contains":   {20, left},
+	"excludes":   {20, left},
 	"startsWith": {20, left},
 	"endsWith":   {20, left},
 	"..":         {25, left},

@@ -125,7 +125,8 @@ loop:
 			switch l.word() {
 			case "not":
 				return not
-			case "in", "or", "and", "matches", "contains", "startsWith", "endsWith":
+			// TODO excludes
+			case "in", "or", "and", "matches", "contains", "excludes", "startsWith", "endsWith":
 				l.emit(Operator)
 			default:
 				l.emit(Identifier)
